@@ -7,9 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TwitterViewController.h"
 @implementation AppDelegate
-
+#define IS_IPAD	(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 @synthesize window = _window;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -26,10 +26,33 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    UINavigationController* navController = [[UINavigationController alloc] init];
+    TwitterViewController *twitterController;
+ //   if (IS_IPAD)
+    twitterController = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
+   // else 
+   // twitterController = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController_iPhone" bundle:nil];    
+    [navController pushViewController:twitterController animated:NO];
+    twitterController.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    twitterController.managedObjectContext = context;
+    
+   // [self.window addSubview:navController.view];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
+    
+    
+    
+    
+    [navController release];
+    [twitterController release];
     return YES;
 }
 
@@ -113,7 +136,7 @@
         return __persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TwitterForFlatSoft.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TwitterForFlatSoft.db"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Tweets" representedClassName="Tweets" syncable="YES">
+        <attribute name="date" attributeType="String" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <attribute name="tweetId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES">
+        <attribute name="userId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userImage" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="userName" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Tweets" positionX="1350" positionY="-531" width="200" height="105"/>
+        <element name="Users" positionX="1627" positionY="-513" width="128" height="105"/>
+    </elements>
 </model>

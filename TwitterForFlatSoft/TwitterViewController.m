@@ -43,6 +43,21 @@ static int numberOfTweetsPerPage = 10;
     }
     return ([ar objectAtIndex:0]);
 }
+-(Tweets*) getTweetById:(uint64_t)givenId{
+    NSManagedObjectContext *moc = [self managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Tweets" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tweetId==%llu",givenId];
+    [request setPredicate:predicate];
+    NSArray *ar= [managedObjectContext executeFetchRequest:request error:nil];
+    if ([ar count]==0) {
+        return nil;
+    }
+    return ([ar objectAtIndex:0]);
+
+
+}
 -(void) getTweetsToShow{
     [tweetsArray removeAllObjects];
     NSManagedObjectContext *moc = [self managedObjectContext];
@@ -85,10 +100,15 @@ static int numberOfTweetsPerPage = 10;
         
         uint64_t userID = [userElement child:@"id"].text.longLongValue;
         
-        Tweets *tweet = (Tweets *)[NSEntityDescription insertNewObjectForEntityForName:@"Tweets" inManagedObjectContext:managedObjectContext];
-        
-        
-        NSString *dateCreated = [parentElement child:@"created_at"].text;
+            
+            
+            
+        // There is no need to check if tweet already exists. Because it shouls always return nil. But the method takes only 0.002 sec of time, so let it be.
+            Tweets *tweetTemp=   [self getTweetById: userID];
+               
+            if (tweetTemp==nil) {
+            Tweets *tweet = (Tweets *)[NSEntityDescription insertNewObjectForEntityForName:@"Tweets" inManagedObjectContext:managedObjectContext];
+          NSString *dateCreated = [parentElement child:@"created_at"].text;
             NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
             NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
             
@@ -104,7 +124,9 @@ static int numberOfTweetsPerPage = 10;
         [tweet setText:text];
         [tweet setUserId:[NSNumber numberWithUnsignedLongLong:userID]];
         [tweet setTweetId:[NSNumber numberWithUnsignedLongLong:tweetID]];
-        
+                
+        if (isLoadMoreButtonBusy) [tweetsArray addObject:tweet];
+            }
         
           if ([self getUserById:userID]==nil) {
               Users *aUser = (Users *)[NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:managedObjectContext];
@@ -125,7 +147,7 @@ static int numberOfTweetsPerPage = 10;
 //        [managedObjectContext performSelectorOnMainThread:@selector(save:) withObject:nil waitUntilDone:NO];
       //  NSError *error;
             [managedObjectContext save:nil];
-            if (isLoadMoreButtonBusy) [tweetsArray addObject:tweet];
+           
                 //  if (error!=nil) NSLog(@"error=%@",[error description]);
     }
         if ([statuses count]>0 && !isLoadMoreButtonBusy)  [self getTweetsToShow];

@@ -26,31 +26,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     UINavigationController* navController = [[UINavigationController alloc] init];
     TwitterViewController *twitterController;
- //   if (IS_IPAD)
     twitterController = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
-   // else 
-   // twitterController = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController_iPhone" bundle:nil];    
     [navController pushViewController:twitterController animated:NO];
     twitterController.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
 
-    
     NSManagedObjectContext *context = [self managedObjectContext];
     twitterController.managedObjectContext = context;
     
-   // [self.window addSubview:navController.view];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
-    
-    
-    
-    
     [navController release];
     [twitterController release];
     return YES;

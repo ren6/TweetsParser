@@ -15,18 +15,15 @@
     UIActivityIndicatorView *loadingView ;
     NSMutableArray *tweetsArray;
     NSManagedObjectContext *managedObjectContext;
-       uint64_t lastUserId;
+    uint64_t lastUserId;
     Users *user;
     EGORefreshTableHeaderView *_refreshHeaderView;
 	BOOL isLoadMoreButtonBusy;
-	//  Reloading var should really be your tableviews datasource
-	//  Putting it here for demo purposes 
 	BOOL _reloading;
     BOOL launchLoading;
     UIImageView *darkView;
     DetailViewControllerViewController *detailController;
 }
-@property (nonatomic,retain) NSMutableString *parsedString;
 - (void)reloadTableViewDataSource;
 - (void)doneLoadingTableViewData;
 @property (nonatomic,retain) NSManagedObjectContext *managedObjectContext;

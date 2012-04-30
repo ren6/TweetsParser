@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9454A706154EC23400D4C69D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454A705154EC23400D4C69D /* Reachability.m */; };
+		9454A707154EC23400D4C69D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454A705154EC23400D4C69D /* Reachability.m */; };
+		9454A709154EC28C00D4C69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9454A708154EC28C00D4C69D /* SystemConfiguration.framework */; };
+		9454A70A154EC29200D4C69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9454A708154EC28C00D4C69D /* SystemConfiguration.framework */; };
 		947353CE1547D65400850550 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 947353CD1547D65400850550 /* libxml2.dylib */; };
 		9485BB17154719070002E949 /* Tweets.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485BB16154719070002E949 /* Tweets.m */; };
 		9485BB1A1547191E0002E949 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 9485BB191547191E0002E949 /* Users.m */; };
@@ -65,6 +69,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9454A704154EC23400D4C69D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		9454A705154EC23400D4C69D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		9454A708154EC28C00D4C69D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		947353CD1547D65400850550 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		9485BB15154719070002E949 /* Tweets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweets.h; sourceTree = "<group>"; };
 		9485BB16154719070002E949 /* Tweets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweets.m; sourceTree = "<group>"; };
@@ -121,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9454A70A154EC29200D4C69D /* SystemConfiguration.framework in Frameworks */,
 				947353CE1547D65400850550 /* libxml2.dylib in Frameworks */,
 				94A3230E1547321700C55E07 /* QuartzCore.framework in Frameworks */,
 				94E76D3E1546C0EC005FAE0B /* libz.dylib in Frameworks */,
@@ -135,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9454A709154EC28C00D4C69D /* SystemConfiguration.framework in Frameworks */,
 				94B3C0AB15483752000EE0DE /* libxml2.dylib in Frameworks */,
 				94B3C0AA1548374C000EE0DE /* libz.dylib in Frameworks */,
 				94B3C0A915483743000EE0DE /* QuartzCore.framework in Frameworks */,
@@ -199,6 +208,7 @@
 		94E76CE21546B960005FAE0B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9454A708154EC28C00D4C69D /* SystemConfiguration.framework */,
 				94E76D3D1546C0EC005FAE0B /* libz.dylib */,
 				947353CD1547D65400850550 /* libxml2.dylib */,
 				94A3230D1547321700C55E07 /* QuartzCore.framework */,
@@ -214,7 +224,6 @@
 		94E76CEB1546B960005FAE0B /* TwitterForFlatSoft */ = {
 			isa = PBXGroup;
 			children = (
-				94A323091547320200C55E07 /* View */,
 				94E76CF41546B960005FAE0B /* AppDelegate.h */,
 				94E76CF51546B960005FAE0B /* AppDelegate.m */,
 				94E76D181546BA7F005FAE0B /* TwitterViewController.h */,
@@ -229,10 +238,13 @@
 		94E76CEC1546B960005FAE0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				94A323091547320200C55E07 /* View */,
 				94A323201547411800C55E07 /* TwitterViewController.xib */,
 				94E76CF71546B960005FAE0B /* TwitterForFlatSoft.xcdatamodeld */,
 				94B3C0A415483704000EE0DE /* RXMLElement.h */,
 				94B3C0A515483704000EE0DE /* RXMLElement.m */,
+				9454A704154EC23400D4C69D /* Reachability.h */,
+				9454A705154EC23400D4C69D /* Reachability.m */,
 				9485BB15154719070002E949 /* Tweets.h */,
 				9485BB16154719070002E949 /* Tweets.m */,
 				9485BB181547191E0002E949 /* Users.h */,
@@ -398,6 +410,7 @@
 				94A3230C1547320200C55E07 /* EGORefreshTableHeaderView.m in Sources */,
 				94A323161547337400C55E07 /* DetailViewControllerViewController.m in Sources */,
 				94B3C0A615483704000EE0DE /* RXMLElement.m in Sources */,
+				9454A706154EC23400D4C69D /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +421,7 @@
 				94E76D0F1546B960005FAE0B /* TwitterForFlatSoftTests.m in Sources */,
 				94E76D431546C184005FAE0B /* NSDataAdditions.m in Sources */,
 				94B3C0A715483704000EE0DE /* RXMLElement.m in Sources */,
+				9454A707154EC23400D4C69D /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

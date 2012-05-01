@@ -119,8 +119,8 @@ static int numberOfTweetsPerPage = 10;
 -(void) loadTweetsForUserName:(NSURL*)url{
     // create a new autorelease pool in background thread
     NSAutoreleasePool *pool  = [[NSAutoreleasePool alloc] init];
+    NSLog(@"url=%@",[url absoluteString]);
     RXMLElement *root = [[RXMLElement alloc] initFromURL:url]; 
-
     if (root!=nil && root.tag!=nil && [root.tag isEqualToString:@"statuses"]) {
         NSArray *statuses  = [root children:@"status"];
         
@@ -140,7 +140,7 @@ static int numberOfTweetsPerPage = 10;
             uint64_t userID = [userElement child:@"id"].text.longLongValue;
 
             // There is no need to check if tweet already exists. Because it should always return nil. But the method takes only 0.002 sec of time, so let it be.
-            Tweets *tweetTemp=   [self getTweetById: userID];
+            Tweets *tweetTemp=   [self getTweetById: tweetID];
             if (tweetTemp==nil) {
             Tweets *tweet = (Tweets *)[NSEntityDescription insertNewObjectForEntityForName:@"Tweets" inManagedObjectContext:managedObjectContext];
             NSString *dateCreated = [parentElement child:@"created_at"].text;
@@ -148,7 +148,7 @@ static int numberOfTweetsPerPage = 10;
             NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
             NSArray *parts = [dateCreated componentsSeparatedByCharactersInSet:whitespaces];
             NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
-            NSString *dateStr = [NSString stringWithFormat:@"%@ %@ %@",
+            NSString *dateStr = [NSString stringWithFormat: @"%@ %@ %@",
                                  [filteredArray objectAtIndex:1],
                                  [filteredArray objectAtIndex:2],
                                  [filteredArray objectAtIndex:3]];
@@ -214,7 +214,7 @@ static int numberOfTweetsPerPage = 10;
     if (toLoadUpRows) {
     if ( [tweetsArray count]>0) {
     Tweets *tweet = (Tweets*)[tweetsArray objectAtIndex:0];
-    uint64_t lastId = [tweet.tweetId unsignedLongLongValue];
+    uint64_t lastId = [tweet.tweetId unsignedLongLongValue]+1;
     url = [NSURL URLWithString:
            [NSString stringWithFormat:@"https://api.twitter.com/1/statuses/user_timeline.xml?include_entities=true&include_rts=true&screen_name=%@&since_id=%llu",twitterAccountName,lastId]];
     } else {
